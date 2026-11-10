@@ -102,15 +102,6 @@ export default class MedialinePreferences extends ExtensionPreferences {
         placementGroup.add(this._makeSpinRow(settings, 'panel-index',
             _('Position index'), _('Order within the panel section (0 is leftmost)'), 0, 20, 1));
 
-        const clockGroup = new Adw.PreferencesGroup({
-            title: _('Clock waveform'),
-            description: _('Animated bars beside the clock, matching its text color.'),
-        });
-        page.add(clockGroup);
-        clockGroup.add(this._makeSwitchRow(settings, 'show-clock-waveform',
-            _('Show clock waveform'),
-            _('Show while media is playing; hide when paused or stopped.')));
-
         const iconGroup = new Adw.PreferencesGroup({
             title: _('Icon'),
             description: _('How Medialine represents the currently playing media in the panel and popup.'),
@@ -329,6 +320,10 @@ export default class MedialinePreferences extends ExtensionPreferences {
         displayGroup.add(this._makeSwitchRow(settings, 'popup-show-visualizer',
             _('Music visualizer'),
             _('Animated bars next to the track info for some eye candy.')));
+
+        displayGroup.add(this._makeSwitchRow(settings, 'show-clock-waveform',
+            _('Clock waveform'),
+            _('Show while media is playing; hide when paused or stopped.')));
 
         displayGroup.add(this._makeSwitchRow(settings, 'popup-show-app-icon',
             _('App icon on album art'),
