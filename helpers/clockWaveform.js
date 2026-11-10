@@ -23,7 +23,8 @@ export class ClockWaveform {
         this._right = null;
         this._bars = [];
 
-        const clockBox = Main.panel.statusArea.dateMenu?._clockDisplay?.get_parent();
+        this._clock = Main.panel.statusArea.dateMenu?._clockDisplay;
+        const clockBox = this._clock?.get_parent();
         if (!clockBox)
             return;
 
@@ -34,10 +35,8 @@ export class ClockWaveform {
 
         this._left.connectObject('notify::mapped', () => this._syncAnimation(), this);
         this._right.connectObject('notify::mapped', () => this._syncAnimation(), this);
-        preferences.connectObject(
-            'changed::show-clock-waveform', () => this._sync(),
-            'changed::popup-secondary-color', () => this._syncColor(),
-            this);
+        preferences.connectObject('changed::show-clock-waveform', () => this._sync(), this);
+        this._clock.connectObject('style-changed', () => this._syncColor(), this);
         mprisManager.connectObject('media-changed', () => this._sync(), this);
         this._syncColor();
         this._sync();
@@ -70,7 +69,8 @@ export class ClockWaveform {
     }
 
     _syncColor() {
-        const style = `background-color: ${this._preferences.popupSecondaryColor}; border-radius: 1px;`;
+        const color = this._clock.get_theme_node().get_foreground_color();
+        const style = `background-color: rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255}); border-radius: 1px;`;
         for (const bars of this._bars) {
             for (const bar of bars)
                 bar.style = style;
@@ -129,6 +129,7 @@ export class ClockWaveform {
     destroy() {
         this._preferences.disconnectObject(this);
         this._mprisManager.disconnectObject(this);
+        this._clock?.disconnectObject(this);
         this._left?.disconnectObject(this);
         this._right?.disconnectObject(this);
         this._stop();
@@ -136,6 +137,7 @@ export class ClockWaveform {
         this._right?.destroy();
         this._left = null;
         this._right = null;
+        this._clock = null;
         this._bars = [];
     }
 }
