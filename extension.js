@@ -6,6 +6,7 @@ import * as MprisModule from 'resource:///org/gnome/shell/ui/mpris.js';
 import { ExtensionSettings } from './helpers/settings.js';
 import { MprisManager } from './helpers/mprisManager.js';
 import { Indicator } from './helpers/indicator.js';
+import { ClockWaveform } from './helpers/clockWaveform.js';
 
 const PANEL_POSITIONS = ['left', 'center', 'right'];
 const MprisSource = MprisModule.MprisSource ?? MprisModule.MediaSection;
@@ -15,6 +16,7 @@ export default class MedialineExtension extends Extension {
         this._preferences = new ExtensionSettings(this);
         this._mprisManager = new MprisManager(this._preferences);
         this._indicator = null;
+        this._clockWaveform = null;
         this._enableIdleId = null;
         this._positionIdleId = null;
         this._origAddPlayer = null;
@@ -36,6 +38,7 @@ export default class MedialineExtension extends Extension {
                 const index = this._preferences.panelIndex || 0;
                 this._indicator = new Indicator(this._preferences, this, this._mprisManager);
                 Main.panel.addToStatusArea(this.uuid, this._indicator, index, position);
+                this._clockWaveform = new ClockWaveform(this._preferences, this._mprisManager);
                 this._connectPanelBoxSignals();
             }
             this._enableIdleId = null;
@@ -157,6 +160,9 @@ export default class MedialineExtension extends Extension {
                 mediaSource._onProxyReady();
             this._origAddPlayer = null;
         }
+
+        this._clockWaveform?.destroy();
+        this._clockWaveform = null;
 
         if (this._indicator) {
             this._indicator.destroy();

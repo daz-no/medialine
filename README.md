@@ -34,6 +34,12 @@ A GNOME Shell extension that shows the currently playing media track in the top 
 - Auto-hides when no media is playing or playback is stopped
 - Configurable icon size, spacing, text separator, and max label width
 
+### Clock Waveform
+- Animated blue waveform bars on both sides of the top bar clock while any unblocked media player is playing
+- Both waveforms disappear when all players are paused, stopped, or closed
+- Mirrored, decorative animation driven by playback state rather than audio analysis
+- Enabled by default; toggle it under **Top Bar → Clock waveform**
+
 ### Rich Popup
 Click the indicator to open a media popup with:
 - Album art preserving the original aspect ratio (square album covers and 16:9 video thumbnails like YouTube) — click to **raise/focus the player window**
@@ -143,6 +149,8 @@ Open the extension preferences via:
 Preferences are split across three pages: **Top Bar**, **Popup**, and **Behaviour**.
 
 ### Top Bar page
+**Clock waveform** — show animated blue bars beside the clock during playback. They hide automatically when playback pauses or stops.
+
 **Panel placement**
 | Setting        | Description                          |
 | -------------- | ------------------------------------ |

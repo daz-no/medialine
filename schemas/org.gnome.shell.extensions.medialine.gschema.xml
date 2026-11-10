@@ -76,6 +76,13 @@
       <summary>Position index within the panel section</summary>
     </key>
 
+    <key name="show-clock-waveform" type="b">
+      <default>true</default>
+      <summary>Show animated waveforms beside the clock</summary>
+      <description>Show blue animated bars on both sides of the top bar clock while an unblocked
+        media player is playing. Hide them when playback pauses or stops.</description>
+    </key>
+
     <key name="hide-default-notification" type="b">
       <default>false</default>
       <summary>Hide default GNOME media notification</summary>

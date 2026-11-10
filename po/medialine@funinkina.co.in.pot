@@ -86,6 +86,22 @@ msgid "Order within the panel section (0 is leftmost)"
 msgstr ""
 
 #: prefs.js:106
+msgid "Clock waveform"
+msgstr ""
+
+#: prefs.js:107
+msgid "Animated blue bars on both sides of the top bar clock."
+msgstr ""
+
+#: prefs.js:111
+msgid "Show clock waveform"
+msgstr ""
+
+#: prefs.js:112
+msgid "Show while media is playing; hide when paused or stopped."
+msgstr ""
+
+#: prefs.js:106
 msgid "Icon"
 msgstr ""
 
