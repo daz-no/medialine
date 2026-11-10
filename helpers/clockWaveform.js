@@ -20,10 +20,12 @@ export class ClockWaveform {
         if (!clockBox)
             return;
 
-        this._visualizers = [
-            new Visualizer({ visualizerBar: '' }, WAVEFORM_SIZE),
-            new Visualizer({ visualizerBar: '' }, WAVEFORM_SIZE),
-        ];
+        const right = new Visualizer({ visualizerBar: '' }, WAVEFORM_SIZE);
+        const left = new Visualizer({ visualizerBar: '' }, {
+            ...WAVEFORM_SIZE,
+            mirrorOf: right,
+        });
+        this._visualizers = [left, right];
         clockBox.insert_child_at_index(this._visualizers[0].actor, 0);
         clockBox.add_child(this._visualizers[1].actor);
 

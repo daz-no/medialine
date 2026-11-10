@@ -1,4 +1,5 @@
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import Clutter from 'gi://Clutter';
 import St from 'gi://St';
 
@@ -13,8 +14,10 @@ export class Visualizer {
         barWidth = VIS_BAR_WIDTH,
         barGap = VIS_BAR_GAP,
         height = VIS_HEIGHT,
+        mirrorOf = null,
     } = {}) {
         this._bars = [];
+        this._heightBindings = [];
         this._tickId = null;
         this._playing = false;
         this._active = false;
@@ -40,6 +43,13 @@ export class Visualizer {
             this.actor.add_child(bar);
             this._bars.push(bar);
         }
+
+        // Follow each animation frame in reverse order, including the pause transition.
+        if (mirrorOf) {
+            this._heightBindings = this._bars.map((bar, index) =>
+                mirrorOf._bars[barCount - 1 - index].bind_property(
+                    'height', bar, 'height', GObject.BindingFlags.SYNC_CREATE));
+        }
     }
 
     setStyle(styles) {
@@ -62,7 +72,7 @@ export class Visualizer {
     }
 
     _sync() {
-        if (!this.actor)
+        if (!this.actor || this._heightBindings.length > 0)
             return;
         if (this._playing && this._active)
             this._startTicker();
@@ -114,6 +124,9 @@ export class Visualizer {
     }
 
     destroy() {
+        for (const binding of this._heightBindings)
+            binding.unbind();
+        this._heightBindings = [];
         if (this._tickId) {
             GLib.Source.remove(this._tickId);
             this._tickId = null;
