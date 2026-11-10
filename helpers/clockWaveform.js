@@ -1,5 +1,7 @@
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import { PACKAGE_VERSION } from 'resource:///org/gnome/shell/misc/config.js';
 
+import { CLOCK_COLOR_ACCENT, CLOCK_COLOR_POPUP } from './constants.js';
 import { Visualizer } from './visualizer.js';
 
 // Thinner bars with wider spacing keep each waveform close to its old 42px width.
@@ -27,7 +29,11 @@ export class ClockWaveform {
 
         for (const visualizer of this._visualizers)
             visualizer.actor.connectObject('notify::mapped', () => this._syncAnimation(), this);
-        preferences.connectObject('changed::show-clock-waveform', () => this._sync(), this);
+        preferences.connectObject(
+            'changed::show-clock-waveform', () => this._sync(),
+            'changed::clock-waveform-color', () => this._syncColor(),
+            'changed::popup-secondary-color', () => this._syncColor(),
+            this);
         this._clock.connectObject('style-changed', () => this._syncColor(), this);
         mprisManager.connectObject('media-changed', () => this._sync(), this);
         this._syncColor();
@@ -35,16 +41,30 @@ export class ClockWaveform {
     }
 
     _syncColor() {
-        const color = this._clock.get_theme_node().get_foreground_color();
-        const style = `background-color: rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255}); border-radius: 999px;`;
+        let background;
+        const mode = this._preferences.clockWaveformColor;
+        if (mode === CLOCK_COLOR_POPUP) {
+            background = this._preferences.popupSecondaryColor;
+        } else if (mode === CLOCK_COLOR_ACCENT && parseInt(PACKAGE_VERSION) >= 47) {
+            // The native CSS color follows system accent changes automatically.
+            background = '-st-accent-color';
+        } else {
+            // Clock text is also the fallback on Shell 46, which has no system accent.
+            const color = this._clock.get_theme_node().get_foreground_color();
+            background = `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
+        }
+        const style = `background-color: ${background}; border-radius: 999px;`;
         for (const visualizer of this._visualizers)
             visualizer.setStyle({ visualizerBar: style });
     }
 
     _sync() {
-        const playing = this._mprisManager.allMedia.some(media => media.status === 'Playing');
+        const activeMedia = this._mprisManager.allMedia.filter(
+            media => media.status === 'Playing' || media.status === 'Paused');
+        const visible = this._preferences.showClockWaveform && activeMedia.length > 0;
+        const playing = activeMedia.some(media => media.status === 'Playing');
         for (const visualizer of this._visualizers) {
-            visualizer.actor.visible = this._preferences.showClockWaveform;
+            visualizer.actor.visible = visible;
             visualizer.setPlaying(playing);
         }
         this._syncAnimation();

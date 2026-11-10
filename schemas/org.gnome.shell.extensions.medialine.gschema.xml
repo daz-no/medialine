@@ -32,6 +32,12 @@
     <value value="2" nick="click" />
   </enum>
 
+  <enum id="org.gnome.shell.extensions.medialine.clock-waveform-color">
+    <value value="0" nick="clock-text" />
+    <value value="1" nick="system-accent" />
+    <value value="2" nick="popup-visualizer" />
+  </enum>
+
   <schema id="org.gnome.shell.extensions.medialine"
     path="/org/gnome/shell/extensions/medialine/">
 
@@ -80,8 +86,14 @@
       <default>true</default>
       <summary>Show animated waveforms beside the clock</summary>
       <description>Show animated bars on both sides of the top bar clock while an unblocked
-        media player is playing, and dots when playback is paused or stopped. Matches the clock
-        text color from the current GNOME Shell theme.</description>
+        media player is playing, and dots while paused. Hide when no player is active.</description>
+    </key>
+
+    <key name="clock-waveform-color" enum="org.gnome.shell.extensions.medialine.clock-waveform-color">
+      <default>'clock-text'</default>
+      <summary>Clock waveform color source</summary>
+      <description>Use the clock text color, the system accent color, or the popup visualizer's
+        existing secondary color. System accent falls back to clock text on GNOME Shell 46.</description>
     </key>
 
     <key name="hide-default-notification" type="b">

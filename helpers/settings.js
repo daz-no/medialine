@@ -11,6 +11,7 @@ export class ExtensionSettings {
     get panelPosition() { return this._settings.get_enum('panel-position'); }
     get panelIndex() { return this._settings.get_int('panel-index'); }
     get showClockWaveform() { return this._settings.get_boolean('show-clock-waveform'); }
+    get clockWaveformColor() { return this._settings.get_enum('clock-waveform-color'); }
     get hideDefaultNotification() { return this._settings.get_boolean('hide-default-notification'); }
     get showTitle() { return this._settings.get_boolean('show-title'); }
     get showArtist() { return this._settings.get_boolean('show-artist'); }

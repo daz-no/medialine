@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Medialine 6\n"
+"Project-Id-Version: Medialine 14\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-12 13:28+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -265,14 +265,6 @@ msgid "Animated bars next to the track info for some eye candy."
 msgstr ""
 
 #: prefs.js:325
-msgid "Clock waveform"
-msgstr ""
-
-#: prefs.js:326
-msgid "Animated bars beside the clock; dots when paused or stopped."
-msgstr ""
-
-#: prefs.js:325
 msgid "App icon on album art"
 msgstr ""
 
@@ -481,4 +473,40 @@ msgstr ""
 #: helpers/indicator.js:424 helpers/indicator.js:474
 #: helpers/expandableMediaRow.js:143
 msgid "Unknown"
+msgstr ""
+
+#: prefs.js:106
+msgid "Clock waveform"
+msgstr ""
+
+#: prefs.js:107
+msgid "Animated bars beside the clock while playing; dots while paused."
+msgstr ""
+
+#: prefs.js:111
+msgid "Show clock waveform"
+msgstr ""
+
+#: prefs.js:111
+msgid "Hide when no player is active."
+msgstr ""
+
+#: prefs.js:114
+msgid "Music visualizer color"
+msgstr ""
+
+#: prefs.js:115
+msgid "Popup visualizer uses Popup → Colors → Secondary color."
+msgstr ""
+
+#: prefs.js:116
+msgid "Clock text"
+msgstr ""
+
+#: prefs.js:116
+msgid "System accent"
+msgstr ""
+
+#: prefs.js:116
+msgid "Popup visualizer"
 msgstr ""

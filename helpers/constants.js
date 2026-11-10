@@ -4,6 +4,10 @@ export const ICON_TYPE_STATUS = 2;
 export const ICON_TYPE_CUSTOM = 3;
 export const ICON_TYPE_NONE = 4;
 
+export const CLOCK_COLOR_TEXT = 0;
+export const CLOCK_COLOR_ACCENT = 1;
+export const CLOCK_COLOR_POPUP = 2;
+
 export const CLICK_NOTHING = 0;
 export const CLICK_OPEN_POPUP = 1;
 export const CLICK_PLAY_PAUSE = 2;

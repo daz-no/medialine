@@ -102,6 +102,21 @@ export default class MedialinePreferences extends ExtensionPreferences {
         placementGroup.add(this._makeSpinRow(settings, 'panel-index',
             _('Position index'), _('Order within the panel section (0 is leftmost)'), 0, 20, 1));
 
+        const clockGroup = new Adw.PreferencesGroup({
+            title: _('Clock waveform'),
+            description: _('Animated bars beside the clock while playing; dots while paused.'),
+        });
+        page.add(clockGroup);
+        const clockSwitch = this._makeSwitchRow(settings, 'show-clock-waveform',
+            _('Show clock waveform'), _('Hide when no player is active.'));
+        clockGroup.add(clockSwitch);
+        const clockColor = this._makeComboRow(settings, 'clock-waveform-color',
+            _('Music visualizer color'),
+            _('Popup visualizer uses Popup → Colors → Secondary color.'),
+            this._makeStringList([_('Clock text'), _('System accent'), _('Popup visualizer')]));
+        clockSwitch.bind_property('active', clockColor, 'sensitive', GObject.BindingFlags.SYNC_CREATE);
+        clockGroup.add(clockColor);
+
         const iconGroup = new Adw.PreferencesGroup({
             title: _('Icon'),
             description: _('How Medialine represents the currently playing media in the panel and popup.'),
@@ -320,10 +335,6 @@ export default class MedialinePreferences extends ExtensionPreferences {
         displayGroup.add(this._makeSwitchRow(settings, 'popup-show-visualizer',
             _('Music visualizer'),
             _('Animated bars next to the track info for some eye candy.')));
-
-        displayGroup.add(this._makeSwitchRow(settings, 'show-clock-waveform',
-            _('Clock waveform'),
-            _('Animated bars beside the clock; dots when paused or stopped.')));
 
         displayGroup.add(this._makeSwitchRow(settings, 'popup-show-app-icon',
             _('App icon on album art'),
