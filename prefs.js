@@ -323,7 +323,7 @@ export default class MedialinePreferences extends ExtensionPreferences {
 
         displayGroup.add(this._makeSwitchRow(settings, 'show-clock-waveform',
             _('Clock waveform'),
-            _('Show while media is playing; hide when paused or stopped.')));
+            _('Animated bars beside the clock; dots when paused or stopped.')));
 
         displayGroup.add(this._makeSwitchRow(settings, 'popup-show-app-icon',
             _('App icon on album art'),

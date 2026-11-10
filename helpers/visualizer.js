@@ -4,28 +4,35 @@ import St from 'gi://St';
 
 import {
     ANIM_MS, VIS_BARS, VIS_BAR_WIDTH, VIS_BAR_GAP,
-    VIS_HEIGHT, VIS_MIN, VIS_TICK_MS, VIS_WIDTH,
+    VIS_HEIGHT, VIS_TICK_MS,
 } from './constants.js';
 
 export class Visualizer {
-    constructor(styles) {
+    constructor(styles, {
+        barCount = VIS_BARS,
+        barWidth = VIS_BAR_WIDTH,
+        barGap = VIS_BAR_GAP,
+        height = VIS_HEIGHT,
+    } = {}) {
         this._bars = [];
         this._tickId = null;
         this._playing = false;
         this._active = false;
+        this._height = height;
+        this._minHeight = barWidth;
 
         this.actor = new St.BoxLayout({
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER,
-            width: VIS_WIDTH,
-            height: VIS_HEIGHT,
-            style: `spacing: ${VIS_BAR_GAP}px;`,
+            width: barCount * barWidth + (barCount - 1) * barGap,
+            height,
+            style: `spacing: ${barGap}px;`,
         });
 
-        for (let i = 0; i < VIS_BARS; i++) {
+        for (let i = 0; i < barCount; i++) {
             const bar = new St.Widget({
-                width: VIS_BAR_WIDTH,
-                height: VIS_MIN,
+                width: barWidth,
+                height: this._minHeight,
                 y_expand: false,
                 y_align: Clutter.ActorAlign.CENTER,
                 style: styles.visualizerBar,
@@ -83,9 +90,9 @@ export class Visualizer {
     }
 
     _tick() {
-        const range = VIS_HEIGHT - VIS_MIN;
+        const range = this._height - this._minHeight;
         for (const bar of this._bars) {
-            const target = VIS_MIN + Math.round(Math.random() * range);
+            const target = this._minHeight + Math.round(Math.random() * range);
             bar.remove_all_transitions();
             bar.ease({
                 height: target,
@@ -99,7 +106,7 @@ export class Visualizer {
         for (const bar of this._bars) {
             bar.remove_all_transitions();
             bar.ease({
-                height: VIS_MIN,
+                height: this._minHeight,
                 duration: ANIM_MS,
                 mode: Clutter.AnimationMode.EASE_OUT_CUBIC,
             });

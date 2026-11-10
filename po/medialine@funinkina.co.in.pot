@@ -269,7 +269,7 @@ msgid "Clock waveform"
 msgstr ""
 
 #: prefs.js:326
-msgid "Show while media is playing; hide when paused or stopped."
+msgid "Animated bars beside the clock; dots when paused or stopped."
 msgstr ""
 
 #: prefs.js:325

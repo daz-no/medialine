@@ -80,8 +80,8 @@
       <default>true</default>
       <summary>Show animated waveforms beside the clock</summary>
       <description>Show animated bars on both sides of the top bar clock while an unblocked
-        media player is playing. Hide them when playback pauses or stops. Matches the clock text
-        color from the current GNOME Shell theme.</description>
+        media player is playing, and dots when playback is paused or stopped. Matches the clock
+        text color from the current GNOME Shell theme.</description>
     </key>
 
     <key name="hide-default-notification" type="b">
