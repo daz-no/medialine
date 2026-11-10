@@ -104,7 +104,7 @@ export default class MedialinePreferences extends ExtensionPreferences {
 
         const clockGroup = new Adw.PreferencesGroup({
             title: _('Clock waveform'),
-            description: _('Animated blue bars on both sides of the top bar clock.'),
+            description: _('Animated bars beside the clock, using the popup secondary color.'),
         });
         page.add(clockGroup);
         clockGroup.add(this._makeSwitchRow(settings, 'show-clock-waveform',
@@ -294,7 +294,7 @@ export default class MedialinePreferences extends ExtensionPreferences {
             _('Primary color'), _('Color for text and controls'),
             '#FFFFFF'));
         colorsGroup.add(this._makeColorRow(settings, 'popup-secondary-color',
-            _('Secondary color'), _('Color for backgrounds and accents'),
+            _('Secondary color'), _('Color for backgrounds, accents, and the clock waveform'),
             '#888888'));
         colorsGroup.add(this._makeColorRow(settings, 'popup-background-color',
             _('Background color'), _('Background color for the popup (will also be used as fallback if dynamic background is enabled).'),

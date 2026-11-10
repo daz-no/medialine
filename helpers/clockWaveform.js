@@ -34,8 +34,12 @@ export class ClockWaveform {
 
         this._left.connectObject('notify::mapped', () => this._syncAnimation(), this);
         this._right.connectObject('notify::mapped', () => this._syncAnimation(), this);
-        preferences.connectObject('changed::show-clock-waveform', () => this._sync(), this);
+        preferences.connectObject(
+            'changed::show-clock-waveform', () => this._sync(),
+            'changed::popup-secondary-color', () => this._syncColor(),
+            this);
         mprisManager.connectObject('media-changed', () => this._sync(), this);
+        this._syncColor();
         this._sync();
     }
 
@@ -57,13 +61,20 @@ export class ClockWaveform {
                 width: BAR_WIDTH,
                 height: MIN_HEIGHT,
                 y_align: Clutter.ActorAlign.CENTER,
-                style: 'background-color: #3598F4; border-radius: 1px;',
             });
             box.add_child(bar);
             bars.push(bar);
         }
         this._bars.push(bars);
         return box;
+    }
+
+    _syncColor() {
+        const style = `background-color: ${this._preferences.popupSecondaryColor}; border-radius: 1px;`;
+        for (const bars of this._bars) {
+            for (const bar of bars)
+                bar.style = style;
+        }
     }
 
     _sync() {

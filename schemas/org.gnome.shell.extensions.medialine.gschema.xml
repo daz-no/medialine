@@ -79,8 +79,9 @@
     <key name="show-clock-waveform" type="b">
       <default>true</default>
       <summary>Show animated waveforms beside the clock</summary>
-      <description>Show blue animated bars on both sides of the top bar clock while an unblocked
-        media player is playing. Hide them when playback pauses or stops.</description>
+      <description>Show animated bars on both sides of the top bar clock while an unblocked
+        media player is playing. Hide them when playback pauses or stops. Uses the popup secondary
+        color.</description>
     </key>
 
     <key name="hide-default-notification" type="b">
@@ -145,7 +146,7 @@
     <key name="popup-secondary-color" type="s">
       <default>'#888888'</default>
       <summary>Popup secondary color</summary>
-      <description>Secondary color for popup backgrounds and accents</description>
+      <description>Secondary color for popup backgrounds, accents, and the clock waveform</description>
     </key>
 
     <key name="popup-background-color" type="s">

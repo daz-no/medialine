@@ -35,10 +35,11 @@ A GNOME Shell extension that shows the currently playing media track in the top 
 - Configurable icon size, spacing, text separator, and max label width
 
 ### Clock Waveform
-- Animated blue waveform bars on both sides of the top bar clock while any unblocked media player is playing
+- Animated waveform bars on both sides of the top bar clock while any unblocked media player is playing
 - Both waveforms disappear when all players are paused, stopped, or closed
 - Mirrored, decorative animation driven by playback state rather than audio analysis
 - Enabled by default; toggle it under **Top Bar → Clock waveform**
+- Uses **Popup → Colors → Secondary color**, matching the popup visualizer; color changes apply immediately
 
 ### Rich Popup
 Click the indicator to open a media popup with:
@@ -149,7 +150,7 @@ Open the extension preferences via:
 Preferences are split across three pages: **Top Bar**, **Popup**, and **Behaviour**.
 
 ### Top Bar page
-**Clock waveform** — show animated blue bars beside the clock during playback. They hide automatically when playback pauses or stops.
+**Clock waveform** — toggle animated bars beside the clock during playback. They hide automatically when playback pauses or stops and use the secondary color configured on the Popup page.
 
 **Panel placement**
 | Setting        | Description                          |
@@ -177,7 +178,7 @@ Preferences are split across three pages: **Top Bar**, **Popup**, and **Behaviou
 | Setting              | Description                                                                |
 | -------------------- | -------------------------------------------------------------------------- |
 | Primary color        | Text and control color in the popup (with reset)                           |
-| Secondary color      | Background and accent color in the popup (with reset)                      |
+| Secondary color      | Background and accent color in the popup and color of the clock waveform (with reset) |
 | Background color     | Custom background for the popup, also used as fallback for dynamic bg      |
 | Dynamic background   | Extract the dominant color from album art as the popup background          |
 | Background intensity | How bright or dark the dynamic background appears (0 = dark, 100 = bright) |

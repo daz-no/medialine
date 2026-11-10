@@ -90,7 +90,7 @@ msgid "Clock waveform"
 msgstr ""
 
 #: prefs.js:107
-msgid "Animated blue bars on both sides of the top bar clock."
+msgid "Animated bars beside the clock, using the popup secondary color."
 msgstr ""
 
 #: prefs.js:111
@@ -235,7 +235,7 @@ msgid "Secondary color"
 msgstr ""
 
 #: prefs.js:288
-msgid "Color for backgrounds and accents"
+msgid "Color for backgrounds, accents, and the clock waveform"
 msgstr ""
 
 #: prefs.js:291
